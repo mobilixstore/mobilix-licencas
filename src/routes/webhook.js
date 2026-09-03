@@ -8,13 +8,10 @@ const { enviarEmailLicenca } = require('../utils/enviarEmail')
 
 const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN })
 
-// POST /webhook/mercadopago
-// O Mercado Pago chama essa rota automaticamente quando um pagamento é aprovado
 router.post('/mercadopago', async (req, res) => {
   try {
     const { type, data } = req.body
 
-    // Só nos interessa notificação de pagamento
     if (type !== 'payment') {
       return res.status(200).send('ok')
     }
@@ -22,13 +19,12 @@ router.post('/mercadopago', async (req, res) => {
     const paymentClient = new Payment(client)
     const pagamento = await paymentClient.get({ id: data.id })
 
-    // Só processa se o pagamento foi realmente aprovado
     if (pagamento.status !== 'approved') {
       return res.status(200).send('ok')
     }
 
     const email = pagamento.payer?.email
-    const nomeCliente = pagamento.payer?.first_name || 'Cliente'
+    const nomeCliente = pagamento.payer?.first_name || email?.split('@')[0] || 'Cliente'
     const planoId = pagamento.metadata?.plano_id || 'basico'
     const idPagamento = String(pagamento.id)
 
@@ -37,7 +33,6 @@ router.post('/mercadopago', async (req, res) => {
       return res.status(200).send('ok')
     }
 
-    // Evita gerar licença duplicada se o webhook for chamado mais de uma vez
     const [existente] = await db.query(
       'SELECT id FROM licencas WHERE id_pagamento = ?',
       [idPagamento]
@@ -69,7 +64,6 @@ router.post('/mercadopago', async (req, res) => {
     res.status(200).send('ok')
   } catch (err) {
     console.error('Erro ao processar webhook:', err.message)
-    // Sempre responde 200 para o Mercado Pago não ficar reenviando o mesmo evento
     res.status(200).send('erro tratado')
   }
 })

@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 const db = require('../config/database')
 
-// POST /licenca/ativar
-// Chamado pelo MobilixStore na tela de Ativação
-// Body: { chave, idMaquina, nomeMaquina }
 router.post('/ativar', async (req, res) => {
   const { chave, idMaquina, nomeMaquina } = req.body
 
@@ -25,14 +22,12 @@ router.post('/ativar', async (req, res) => {
       return res.status(403).json({ erro: 'Esta licença está bloqueada. Entre em contato com a Mobilix.' })
     }
 
-    // Verifica se essa máquina já está ativada nessa licença
     const [maquinas] = await db.query(
       'SELECT * FROM licencas_maquinas WHERE licenca_id = ? AND id_maquina = ?',
       [licenca.id, idMaquina]
     )
 
     if (maquinas.length > 0) {
-      // Máquina já ativada antes — apenas confirma que continua válida
       return res.json({
         sucesso: true,
         mensagem: 'Licença já ativada nesta máquina.',
@@ -41,7 +36,6 @@ router.post('/ativar', async (req, res) => {
       })
     }
 
-    // Verifica se ainda há vagas de máquina disponíveis nessa licença
     const [contagem] = await db.query(
       'SELECT COUNT(*) as total FROM licencas_maquinas WHERE licenca_id = ?',
       [licenca.id]
@@ -54,7 +48,6 @@ router.post('/ativar', async (req, res) => {
       })
     }
 
-    // Registra essa máquina como ativada
     await db.query(
       'INSERT INTO licencas_maquinas (licenca_id, id_maquina, nome_maquina) VALUES (?, ?, ?)',
       [licenca.id, idMaquina, nomeMaquina || 'Computador']
@@ -72,8 +65,6 @@ router.post('/ativar', async (req, res) => {
   }
 })
 
-// POST /licenca/verificar
-// Chamado toda vez que o MobilixStore abre, para confirmar que a licença continua válida
 router.post('/verificar', async (req, res) => {
   const { chave, idMaquina } = req.body
 
@@ -90,8 +81,6 @@ router.post('/verificar', async (req, res) => {
 
     res.json({ valida: maquinas.length > 0 })
   } catch (err) {
-    // Em caso de erro de conexão, deixa o sistema continuar funcionando
-    // (não trava a loja por falta de internet)
     res.json({ valida: true, offline: true })
   }
 })

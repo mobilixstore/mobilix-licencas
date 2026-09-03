@@ -10,11 +10,6 @@ router.post('/criar', async (req, res) => {
     const { planoId } = req.body
     const plano = getPlano(planoId || 'basico')
 
-    const precoPorPlano = {
-      basico: 297,
-    }
-    const preco = precoPorPlano[plano.id] || 297
-
     const preference = new Preference(client)
     const resultado = await preference.create({
       body: {
@@ -23,7 +18,7 @@ router.post('/criar', async (req, res) => {
             title: plano.nome,
             description: plano.descricao,
             quantity: 1,
-            unit_price: preco,
+            unit_price: plano.preco,
             currency_id: 'BRL',
           },
         ],
@@ -31,7 +26,7 @@ router.post('/criar', async (req, res) => {
           plano_id: plano.id,
         },
         back_urls: {
-          success: process.env.LINK_DOWNLOAD_SISTEMA || 'https://mobilixsaas.com.br/obrigado',
+          success: process.env.LINK_DOWNLOAD_SISTEMA || 'https://mobilixsaas.com.br/download',
           failure: 'https://mobilixsaas.com.br/erro-pagamento',
           pending: 'https://mobilixsaas.com.br/pagamento-pendente',
         },
