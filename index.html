@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MobilixStore - Gestão Completa para Lojas | Mobilix</title>
+<style>
+  :root {
+    --azul-escuro: #0D2E6E;
+    --azul-claro: #2557C7;
+    --amarelo: #FFCC00;
+    --cinza: #7A8EBA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, Arial, sans-serif; background: #F0F4FF; color: #1a1a1a; }
+
+  .header {
+    background: linear-gradient(180deg, var(--azul-escuro), var(--azul-claro));
+    padding: 60px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .logo {
+    display: inline-block;
+    background: var(--amarelo);
+    color: var(--azul-escuro);
+    font-weight: 900;
+    font-size: 28px;
+    padding: 14px 24px;
+    border-radius: 16px;
+    margin-bottom: 16px;
+  }
+  .header h1 { font-size: 32px; margin-bottom: 8px; }
+  .header p { color: var(--amarelo); font-size: 15px; letter-spacing: 1px; text-transform: uppercase; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+  .beneficios {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-bottom: 50px;
+  }
+  .beneficio {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #E2E8F8;
+  }
+  .beneficio-icone { font-size: 28px; margin-bottom: 8px; }
+  .beneficio h3 { color: var(--azul-escuro); font-size: 15px; margin-bottom: 6px; }
+  .beneficio p { color: var(--cinza); font-size: 13px; line-height: 1.5; }
+
+  .titulo-planos { text-align: center; color: var(--azul-escuro); font-size: 24px; font-weight: 900; margin-bottom: 8px; }
+  .subtitulo-planos { text-align: center; color: var(--cinza); font-size: 14px; margin-bottom: 32px; }
+
+  .planos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 950px;
+    margin: 0 auto;
+  }
+
+  .plano-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 28px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(13, 46, 110, 0.08);
+    border: 2px solid transparent;
+    position: relative;
+  }
+  .plano-card.destaque {
+    border-color: var(--amarelo);
+    transform: scale(1.03);
+  }
+  .plano-selo {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--amarelo);
+    color: var(--azul-escuro);
+    font-size: 11px;
+    font-weight: 900;
+    padding: 5px 16px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+  .plano-nome { color: var(--azul-escuro); font-size: 19px; font-weight: 900; margin-bottom: 6px; }
+  .plano-desc { color: var(--cinza); font-size: 13px; margin-bottom: 20px; min-height: 34px; }
+  .plano-preco { font-size: 36px; font-weight: 900; color: var(--azul-escuro); margin-bottom: 2px; }
+  .plano-preco span { font-size: 14px; font-weight: 400; color: var(--cinza); }
+  .plano-parcelamento { color: var(--cinza); font-size: 12px; margin-bottom: 22px; }
+
+  .btn-comprar {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: var(--amarelo);
+    color: var(--azul-escuro);
+    border: none;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 900;
+    cursor: pointer;
+    text-decoration: none;
+    box-sizing: border-box;
+  }
+  .btn-comprar:hover { opacity: 0.9; }
+  .btn-comprar:disabled { opacity: 0.6; cursor: wait; }
+
+  .erro-msg { color: #DC2626; font-size: 12px; margin-top: 10px; display: none; }
+
+  .selo-seguranca { margin-top: 24px; text-align: center; color: var(--cinza); font-size: 12px; }
+
+  .footer { text-align: center; padding: 40px 20px; color: var(--cinza); font-size: 13px; }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">Mx</div>
+    <h1>MobilixStore</h1>
+    <p>Gestão Completa para Lojas</p>
+  </div>
+
+  <div class="container">
+    <div class="beneficios">
+      <div class="beneficio">
+        <div class="beneficio-icone">🛒</div>
+        <h3>PDV Completo</h3>
+        <p>Vendas rápidas com PIX, cartão, boleto e carnê a prazo</p>
+      </div>
+      <div class="beneficio">
+        <div class="beneficio-icone">🔧</div>
+        <h3>Ordem de Serviço</h3>
+        <p>Controle total de assistência técnica com termos de entrega</p>
+      </div>
+      <div class="beneficio">
+        <div class="beneficio-icone">📦</div>
+        <h3>Estoque Inteligente</h3>
+        <p>Alertas de estoque baixo e cadastro completo de produtos</p>
+      </div>
+      <div class="beneficio">
+        <div class="beneficio-icone">💰</div>
+        <h3>Financeiro Completo</h3>
+        <p>Fluxo de caixa, contas a pagar e a receber automatizadas</p>
+      </div>
+      <div class="beneficio">
+        <div class="beneficio-icone">☁️</div>
+        <h3>Backup na Nuvem</h3>
+        <p>Seus dados sempre seguros com backup automático no Google Drive</p>
+      </div>
+      <div class="beneficio">
+        <div class="beneficio-icone">🖥️</div>
+        <h3>Sistema Desktop</h3>
+        <p>Instala direto no seu computador, sem depender de internet para vender</p>
+      </div>
+    </div>
+
+    <div class="titulo-planos">Escolha o plano ideal para sua loja</div>
+    <div class="subtitulo-planos">Pagamento único — sem mensalidades</div>
+
+    <div class="planos-grid">
+
+      <div class="plano-card">
+        <div class="plano-nome">Básico</div>
+        <div class="plano-desc">Licença para 1 computador</div>
+        <div class="plano-preco">R$ 297<span>,00,00</span></div>
+        <div class="plano-parcelamento">ou em até 12x no cartão</div>
+        <button class="btn-comprar" onclick="comprar('basico', this)">Comprar Agora</button>
+        <div class="erro-msg">Erro ao gerar pagamento. Tente novamente.</div>
+      </div>
+
+      <div class="plano-card destaque">
+        <div class="plano-selo">Mais Popular</div>
+        <div class="plano-nome">Pro</div>
+        <div class="plano-desc">Licença para até 3 computadores</div>
+        <div class="plano-preco">R$ 497<span>,00,00</span></div>
+        <div class="plano-parcelamento">ou em até 12x no cartão</div>
+        <button class="btn-comprar" onclick="comprar('pro', this)">Comprar Agora</button>
+        <div class="erro-msg">Erro ao gerar pagamento. Tente novamente.</div>
+      </div>
+
+      <div class="plano-card">
+        <div class="plano-nome">Premium</div>
+        <div class="plano-desc">Licença para até 10 computadores (rede de lojas)</div>
+        <div class="plano-preco">R$ 997<span>,00,00</span></div>
+        <div class="plano-parcelamento">ou em até 12x no cartão</div>
+        <button class="btn-comprar" onclick="comprar('premium', this)">Comprar Agora</button>
+        <div class="erro-msg">Erro ao gerar pagamento. Tente novamente.</div>
+      </div>
+
+    </div>
+
+    <div class="selo-seguranca">🔒 Pagamento seguro processado pelo Mercado Pago</div>
+  </div>
+
+  <div class="footer">
+    Mobilix Soluções Digitais · Arame, MA<br>
+    Após a confirmação do pagamento, você receberá por email o link de download e sua chave de licença.
+  </div>
+
+  <script>
+    async function comprar(planoId, botao) {
+      const card = botao.closest('.plano-card')
+      const erro = card.querySelector('.erro-msg')
+      erro.style.display = 'none'
+      botao.disabled = true
+      const textoOriginal = botao.textContent
+      botao.textContent = 'Gerando pagamento...'
+
+      try {
+        const res = await fetch('https://mobilix-licencas.onrender.com/checkout/criar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ planoId })
+        })
+        const data = await res.json()
+        if (data.linkPagamento) {
+          window.location.href = data.linkPagamento
+        } else {
+          throw new Error(data.erro || 'Link não recebido do servidor')
+        }
+      } catch (err) {
+        erro.textContent = 'Erro: ' + err.message
+        erro.style.display = 'block'
+        botao.disabled = false
+        botao.textContent = textoOriginal
+      }
+    }
+  </script>
+
+</body>
+</html>
