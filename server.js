@@ -10,6 +10,7 @@ app.use(express.json())
 
 app.use('/webhook', require('./src/routes/webhook'))
 app.use('/licenca', require('./src/routes/licenca'))
+app.use('/checkout', require('./src/routes/checkout'))
 
 app.get('/', (req, res) => {
   res.json({ msg: 'Servidor de Licenças MobilixStore - Mobilix Soluções Digitais' })
