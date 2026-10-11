@@ -116,6 +116,12 @@
   .selo-seguranca { margin-top: 24px; text-align: center; color: var(--cinza); font-size: 12px; }
 
   .footer { text-align: center; padding: 40px 20px; color: var(--cinza); font-size: 13px; }
+
+  .email-box { max-width: 480px; margin: 0 auto 28px; text-align: center; }
+  .email-box label { display: block; color: var(--azul-escuro); font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+  .email-box input { width: 100%; padding: 14px 16px; border: 2px solid #E2E8F8; border-radius: 12px; font-size: 15px; outline: none; background: #fff; }
+  .email-box input:focus { border-color: var(--azul-claro); }
+  .email-box small { display: block; color: var(--cinza); font-size: 12px; margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -163,6 +169,12 @@
     <div class="titulo-planos">Escolha o plano ideal para sua loja</div>
     <div class="subtitulo-planos">Pagamento único — sem mensalidades</div>
 
+    <div class="email-box">
+      <label for="emailCliente">Seu e-mail (a licença será enviada para ele)</label>
+      <input type="email" id="emailCliente" placeholder="seuemail@exemplo.com" autocomplete="email">
+      <small>Confira o e-mail antes de comprar. É nele que você recebe a chave e o link de download.</small>
+    </div>
+
     <div class="planos-grid">
 
       <div class="plano-card">
@@ -208,6 +220,13 @@
       const card = botao.closest('.plano-card')
       const erro = card.querySelector('.erro-msg')
       erro.style.display = 'none'
+      const email = (document.getElementById('emailCliente').value || '').trim()
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        erro.textContent = 'Digite um e-mail válido acima para receber a licença.'
+        erro.style.display = 'block'
+        document.getElementById('emailCliente').focus()
+        return
+      }
       botao.disabled = true
       const textoOriginal = botao.textContent
       botao.textContent = 'Gerando pagamento...'
@@ -216,7 +235,7 @@
         const res = await fetch('https://mobilix-licencas-nkce.onrender.com/checkout/criar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ planoId })
+          body: JSON.stringify({ planoId, email })
         })
         const data = await res.json()
         if (data.linkPagamento) {

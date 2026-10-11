@@ -7,7 +7,7 @@ const client = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN 
 
 router.post('/criar', async (req, res) => {
   try {
-    const { planoId } = req.body
+    const { planoId, email } = req.body
     const plano = getPlano(planoId || 'basico')
 
     const preference = new Preference(client)
@@ -23,7 +23,7 @@ router.post('/criar', async (req, res) => {
           },
         ],
         metadata: {
-          plano_id: plano.id,
+          plano_id: plano.id, email_cliente: email || '',
         },
         back_urls: {
           success: process.env.LINK_DOWNLOAD_SISTEMA || 'https://mobilixsaas.com.br/download',

@@ -23,12 +23,12 @@ router.post('/mercadopago', async (req, res) => {
       return res.status(200).send('ok')
     }
 
-    const email = pagamento.payer?.email
-    const nomeCliente = pagamento.payer?.first_name || email?.split('@')[0] || 'Cliente'
+    const email = (pagamento.metadata?.email_cliente || pagamento.payer?.email || '').trim()
+    const nomeCliente = email.split('@')[0] || 'Cliente'
     const planoId = pagamento.metadata?.plano_id || 'basico'
     const idPagamento = String(pagamento.id)
 
-    if (!email) {
+    if (!email || !email.includes('@')) {
       console.error('Pagamento aprovado sem email do comprador:', idPagamento)
       return res.status(200).send('ok')
     }
