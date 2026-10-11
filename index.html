@@ -168,7 +168,7 @@
       <div class="plano-card">
         <div class="plano-nome">Básico</div>
         <div class="plano-desc">Licença para 1 computador</div>
-        <div class="plano-preco">R$ 297<span>,00,00</span></div>
+        <div class="plano-preco">R$ 297<span>,00</span></div>
         <div class="plano-parcelamento">ou em até 12x no cartão</div>
         <button class="btn-comprar" onclick="comprar('basico', this)">Comprar Agora</button>
         <div class="erro-msg">Erro ao gerar pagamento. Tente novamente.</div>
@@ -178,7 +178,7 @@
         <div class="plano-selo">Mais Popular</div>
         <div class="plano-nome">Pro</div>
         <div class="plano-desc">Licença para até 3 computadores</div>
-        <div class="plano-preco">R$ 497<span>,00,00</span></div>
+        <div class="plano-preco">R$ 497<span>,00</span></div>
         <div class="plano-parcelamento">ou em até 12x no cartão</div>
         <button class="btn-comprar" onclick="comprar('pro', this)">Comprar Agora</button>
         <div class="erro-msg">Erro ao gerar pagamento. Tente novamente.</div>
@@ -187,7 +187,7 @@
       <div class="plano-card">
         <div class="plano-nome">Premium</div>
         <div class="plano-desc">Licença para até 10 computadores (rede de lojas)</div>
-        <div class="plano-preco">R$ 997<span>,00,00</span></div>
+        <div class="plano-preco">R$ 997<span>,00</span></div>
         <div class="plano-parcelamento">ou em até 12x no cartão</div>
         <button class="btn-comprar" onclick="comprar('premium', this)">Comprar Agora</button>
         <div class="erro-msg">Erro ao gerar pagamento. Tente novamente.</div>
@@ -213,7 +213,7 @@
       botao.textContent = 'Gerando pagamento...'
 
       try {
-        const res = await fetch('https://mobilix-licencas.onrender.com/checkout/criar', {
+        const res = await fetch('https://mobilix-licencas-nkce.onrender.com/checkout/criar', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ planoId })

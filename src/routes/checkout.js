@@ -31,7 +31,7 @@ router.post('/criar', async (req, res) => {
           pending: 'https://mobilixsaas.com.br/pagamento-pendente',
         },
         auto_return: 'approved',
-        notification_url: 'https://mobilix-licencas.onrender.com/webhook/mercadopago',
+        notification_url: 'https://mobilix-licencas-nkce.onrender.com/webhook/mercadopago',
       },
     })
 
