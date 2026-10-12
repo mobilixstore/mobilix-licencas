@@ -38,7 +38,11 @@ async function enviarEmailLicenca({ destinatario, nomeCliente, chaveLicenca, pla
         </div>
 
         <div style="background: #FFF7ED; border: 1px solid #FED7AA; border-radius: 8px; padding: 14px; font-size: 13px; color: #C2410C;">
-          💡 <strong>Como ativar:</strong> Depois de instalar, abra o programa e cole a chave de licença acima na tela de ativação.
+          💡 <strong>Como ativar:</strong> Depois de instalar, abra o programa e cole a chave de licença acima na tela de ativação. Se o Windows ou o navegador avisar que o arquivo é pouco conhecido, escolha <strong>Manter</strong> e <strong>Executar assim mesmo</strong>.
+        </div>
+
+        <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 14px; font-size: 13px; color: #166534; margin-top: 14px;">
+          🔑 <strong>Primeiro acesso:</strong> depois de ativar, entre com o usuário <strong>admin</strong> e a senha <strong>123456</strong>. Em seguida, troque a senha em <strong>Gerente → Usuários</strong>.
         </div>
 
         <p style="color: #7A8EBA; font-size: 12px; margin-top: 30px; text-align: center;">
