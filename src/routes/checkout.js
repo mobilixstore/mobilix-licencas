@@ -26,9 +26,10 @@ router.post('/criar', async (req, res) => {
           plano_id: plano.id, email_cliente: email || '',
         },
         back_urls: {
-          success: process.env.LINK_DOWNLOAD_SISTEMA || 'https://mobilixsaas.com.br/download',
-          failure: 'https://mobilixsaas.com.br/erro-pagamento',
-          pending: 'https://mobilixsaas.com.br/pagamento-pendente',
+          // O download NUNCA vai aqui: ele so chega por e-mail, depois do pagamento aprovado
+          success: 'https://mobilix-vitrine.onrender.com/obrigado.html',
+          failure: 'https://mobilix-vitrine.onrender.com/erro-pagamento.html',
+          pending: 'https://mobilix-vitrine.onrender.com/pendente.html',
         },
         auto_return: 'approved',
         notification_url: 'https://mobilix-licencas-nkce.onrender.com/webhook/mercadopago',
