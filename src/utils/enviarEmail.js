@@ -42,7 +42,7 @@ async function enviarEmailLicenca({ destinatario, nomeCliente, chaveLicenca, pla
         </div>
 
         <div style="background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; padding: 14px; font-size: 13px; color: #166534; margin-top: 14px;">
-          🔑 <strong>Primeiro acesso:</strong> depois de ativar, entre com o usuário <strong>admin</strong> e a senha <strong>123456</strong>. Em seguida, troque a senha em <strong>Gerente → Usuários</strong>.
+          🔑 <strong>Primeiro acesso:</strong> depois de ativar, o sistema vai pedir para você criar o seu próprio usuário e senha de administrador. Escolha e guarde com cuidado, pois só você terá esse acesso.
         </div>
 
         <p style="color: #7A8EBA; font-size: 12px; margin-top: 30px; text-align: center;">
